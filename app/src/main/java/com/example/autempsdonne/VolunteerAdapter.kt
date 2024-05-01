@@ -7,27 +7,27 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 
-class UserAdapter(val context: Context, var lusers: MutableList<User>) : BaseAdapter() {
+class VolunteerAdapter(private val context: Context, private var lvolunteers: MutableList<Volunteer>) : BaseAdapter() {
 
     override fun getCount(): Int {
-        return this.lusers.size
+        return this.lvolunteers.size
     }
 
     override fun getItem(position: Int): Any {
-        return this.lusers[position]
+        return this.lvolunteers[position]
     }
 
     override fun getItemId(position: Int): Long {
-        return this.lusers[position].id
+        return this.lvolunteers[position].id
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val v = convertView ?: LayoutInflater.from(this.context).inflate(R.layout.row_user, null)
 
-        val currentUser = getItem(position) as User
+        val currentVolunteer = getItem(position) as Volunteer
 
-        v.findViewById<TextView>(R.id.tv_user_username).text = currentUser.username
-        v.findViewById<TextView>(R.id.tv_user_email).text = currentUser.email
+        v.findViewById<TextView>(R.id.tv_user_username).text = currentVolunteer.username
+        v.findViewById<TextView>(R.id.tv_user_email).text = currentVolunteer.email
 
         return v
     }

@@ -1,5 +1,6 @@
 package com.example.autempsdonne
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -7,6 +8,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONObject
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +44,8 @@ class HomeActivity : AppCompatActivity() {
             *  Scanner NFC
             *  Valider et renvoyer au menu
             * */
+            val i = Intent(this, VolunteersListActivity::class.java)
+            startActivity(i)
         }
     }
 }

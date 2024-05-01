@@ -32,7 +32,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
             val identifierType = if (identifier.contains('@')) "email" else "username"
 
-            val url = "https://api.autantdonner.fr/api/auth/login"
+            val url = API_URL_ROOT + "auth/login"
             val reqBody = JSONObject().apply {
                 put(identifierType, identifier)
                 put("password", password)

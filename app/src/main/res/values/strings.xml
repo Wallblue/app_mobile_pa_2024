@@ -5,7 +5,11 @@
     <string name="UsernameOrMail">Nom d\'utilisateur ou Mail</string>
     <string name="Password">Mot de passe</string>
     <string name="Submit">Envoyer</string>
-    <string name="LoginErr">Connexion Impossible</string>
     <string name="BadCredentials">Identifiants invalides</string>
-    <string name="AssignNFC">Assigner un utilisateur à un tag NFC</string>
+    <string name="AssignNFC">Assigner un bénévole à un tag NFC</string>
+    <string name="ChooseVolunteer">Choisissez un bénévole</string>
+
+    <!-- ERRORS -->
+    <string name="LoginErr">Connexion Impossible</string>
+    <string name="UsersLoadingErr">Chargement des utilisateurs impossible</string>
 </resources>
