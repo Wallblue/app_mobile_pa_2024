@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity"
+    android:orientation="vertical"
+>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu"
+        android:gravity="center"
+        android:textSize="50sp"
+    />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        android:gravity="center"
+    >
+
+        <Button
+            android:id="@+id/home_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="b1"
+            android:layout_marginBottom="15sp"
+            android:height="65sp"
+            android:width="500dp"
+        />
+
+        <Button
+            android:id="@+id/home_btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="b2"
+            android:layout_marginBottom="15sp"
+            android:height="65sp"
+            android:width="500dp"
+        />
+
+        <Button
+            android:id="@+id/home_btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="b2"
+            android:layout_marginBottom="15sp"
+            android:height="65sp"
+            android:width="500dp"
+        />
+
+        <Button
+            android:id="@+id/home_assignNFC_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/AssignNFC"
+            android:layout_marginBottom="15sp"
+            android:height="65sp"
+            android:width="500dp"
+        />
+    </LinearLayout>
+
+</LinearLayout>

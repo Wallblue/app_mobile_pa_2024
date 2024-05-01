@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Au Temps Donne</string>
     <string name="Authentication">Authentication</string>
     <string name="UsernameOrMail">Username or Email</string>
     <string name="Password">Password</string>
     <string name="Submit">Submit</string>
     <string name="LoginErr">Login Impossible</string>
+    <string name="BadCredentials">Invalid credentials</string>
+    <string name="AssignNFC">Assign user to NFC tag</string>
 </resources>
