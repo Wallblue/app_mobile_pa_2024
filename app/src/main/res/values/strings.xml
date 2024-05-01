@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Au Temps Donne</string>
+    <string name="Authentication">Authentification</string>
+    <string name="UsernameOrMail">Nom d\'utilisateur ou Mail</string>
+    <string name="Password">Mot de passe</string>
+    <string name="Submit">Envoyer</string>
 </resources>
