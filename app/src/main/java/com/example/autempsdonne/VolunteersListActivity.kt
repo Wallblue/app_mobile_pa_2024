@@ -71,6 +71,8 @@ class VolunteersListActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
                 else
                     Toast.makeText(applicationContext, R.string.UsersLoadingErr, Toast.LENGTH_LONG).show()
+
+                finish()
             }
         )
         queue.add(req)
