@@ -5,4 +5,5 @@
     <string name="UsernameOrMail">Username or Email</string>
     <string name="Password">Password</string>
     <string name="Submit">Submit</string>
+    <string name="LoginErr">Login Impossible</string>
 </resources>

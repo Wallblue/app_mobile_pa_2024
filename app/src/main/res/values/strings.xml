@@ -4,4 +4,5 @@
     <string name="UsernameOrMail">Nom d\'utilisateur ou Mail</string>
     <string name="Password">Mot de passe</string>
     <string name="Submit">Envoyer</string>
+    <string name="LoginErr">Connexion Impossible</string>
 </resources>
