@@ -37,6 +37,17 @@ class NfcManagement {
             Toast.makeText(context, R.string.Written, Toast.LENGTH_LONG).show()
         }
 
+        fun readTag(intent: Intent, tag: Tag?) : String {
+            val ndefMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
+            val messages: List<NdefMessage>? = ndefMessages?.map { it as NdefMessage }
+            var res = ""
+            if (messages != null)
+                for (message in messages)
+                    for(record in message.records)
+                        res += String(record.payload, Charsets.UTF_8)
+            return res
+        }
+
         fun disable(nfcAdapter: NfcAdapter?, activity: Activity) {
             nfcAdapter?.disableForegroundDispatch(activity)
         }

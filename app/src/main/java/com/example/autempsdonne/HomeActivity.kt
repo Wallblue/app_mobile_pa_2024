@@ -8,10 +8,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import org.json.JSONObject
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,18 +28,12 @@ class HomeActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "b2", Toast.LENGTH_SHORT).show()
         }
 
-        findViewById<Button>(R.id.home_btn3).setOnClickListener{
-            Toast.makeText(applicationContext, "b3", Toast.LENGTH_SHORT).show()
+        findViewById<Button>(R.id.home_read_nfc).setOnClickListener{
+            val i = Intent(this, ReadNfcActivity::class.java)
+            startActivity(i)
         }
 
         findViewById<Button>(R.id.home_assignNFC_btn).setOnClickListener{
-            /*
-            * TODO
-            *  Lister les utilisateurs
-            *  Choisir utilisateur
-            *  Scanner NFC
-            *  Valider et renvoyer au menu
-            * */
             val i = Intent(this, VolunteersListActivity::class.java)
             startActivity(i)
         }

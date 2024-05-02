@@ -20,4 +20,5 @@
     <string name="NoWritingErr">Writing is impossible</string>
     <string name="NoSpaceTagErr">No more space in tag</string>
     <string name="Written">Written</string>
+    <string name="ReadNFC">Read a tag</string>
 </resources>
