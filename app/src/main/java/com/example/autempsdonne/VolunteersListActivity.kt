@@ -1,5 +1,6 @@
 package com.example.autempsdonne
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ListView
 import android.widget.Toast
@@ -63,7 +64,21 @@ class VolunteersListActivity : AppCompatActivity() {
                     val va = adapter.adapter as VolunteerAdapter
                     val item = va.getItem(pos) as Volunteer
 
-                    Toast.makeText(applicationContext, item.firstName + " " + item.name, Toast.LENGTH_LONG).show()
+                    val i = Intent(applicationContext, AssignNfcActivity::class.java)
+
+                    i.putExtra("id", item.id)
+                    i.putExtra("userId", item.userId)
+                    i.putExtra("name", item.name)
+                    i.putExtra("firstName", item.firstName)
+                    i.putExtra("username", item.username)
+                    i.putExtra("email", item.email)
+                    i.putExtra("phone", item.phone)
+                    i.putExtra("license", item.license)
+                    i.putExtra("authLevel", item.authLevel)
+                    i.putExtra("siteId", item.siteId)
+                    i.putExtra("url", item.url)
+
+                    startActivity(i)
                 }
             },
             {error ->
