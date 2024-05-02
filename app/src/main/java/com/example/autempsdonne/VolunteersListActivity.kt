@@ -66,17 +66,7 @@ class VolunteersListActivity : AppCompatActivity() {
 
                     val i = Intent(applicationContext, AssignNfcActivity::class.java)
 
-                    i.putExtra("id", item.id)
-                    i.putExtra("userId", item.userId)
-                    i.putExtra("name", item.name)
-                    i.putExtra("firstName", item.firstName)
-                    i.putExtra("username", item.username)
-                    i.putExtra("email", item.email)
-                    i.putExtra("phone", item.phone)
-                    i.putExtra("license", item.license)
-                    i.putExtra("authLevel", item.authLevel)
-                    i.putExtra("siteId", item.siteId)
-                    i.putExtra("url", item.url)
+                    i.putExtra("content", item.url)
 
                     startActivity(i)
                 }

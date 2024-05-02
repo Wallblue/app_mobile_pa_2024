@@ -3,10 +3,14 @@ package com.example.autempsdonne
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentFilter
+import android.nfc.NdefMessage
+import android.nfc.NdefRecord
 import android.nfc.NfcAdapter
 import android.nfc.Tag
+import android.nfc.tech.Ndef
 import android.nfc.tech.NfcA
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat
 class AssignNfcActivity : AppCompatActivity() {
     private var nfcAdapter: NfcAdapter? = null
     private var pendingIntent: PendingIntent? = null
-    private var currentVolunteer: Volunteer? = null
+    private var content: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,76 +30,36 @@ class AssignNfcActivity : AppCompatActivity() {
             insets
         }
 
-        /*this.currentVolunteer = Volunteer(
-            intent.getLongExtra("id", 0),
-            intent.getLongExtra("userId", 0),
-            intent.getStringExtra("name"),
-            intent.getStringExtra("firstName"),
-            intent.getStringExtra("username"),
-            intent.getStringExtra("email"),
-            intent.getStringExtra("phone"),
-            intent.getIntExtra("license", 0),
-            intent.getIntExtra("authLevel", 0),
-            intent.getLongExtra("siteId", 0),
-            intent.getStringExtra("url")
-        )
-
-        if(! currentVolunteer!!.isOkay()){
-            Toast.makeText(applicationContext, R.string.Err, Toast.LENGTH_SHORT).show()
-            finish()
-        }*/
+        this.content = intent.getStringExtra("content")
 
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         this.nfcAdapter?.let {
-            println("coucou")
+            NfcManagement.createPendingIntent(this, javaClass)
+            println(javaClass)
             this.pendingIntent = PendingIntent.getActivity(this, 0,
                 Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
-                PendingIntent.FLAG_IMMUTABLE)
+                PendingIntent.FLAG_MUTABLE)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        enable()
-    }
-
-    private fun enable() {
-        val ndef = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED)
-        val tech = IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED)
-        val tag = IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)
-        val filterArray = arrayOf(ndef, tech, tag)
-
-        nfcAdapter?.enableForegroundDispatch(this, pendingIntent, filterArray, null)
+        NfcManagement.enable(nfcAdapter, this, pendingIntent)
     }
 
     override fun onPause() {
         super.onPause()
-        disable()
+        NfcManagement.disable(nfcAdapter, this)
     }
 
-    private fun disable() {
-        nfcAdapter?.disableForegroundDispatch(this)
-    }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
 
-    override fun onNewIntent(i: Intent?) {
-        super.onNewIntent(i)
-        resolveIntent(i)
-    }
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
+            // We get the scanned tag
+            val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
 
-    private fun resolveIntent(i: Intent?) {
-        val action = i?.action
-        println(i.toString())
-
-        if(action == NfcAdapter.ACTION_NDEF_DISCOVERED){
-            println("oui")
-        } else if (action == NfcAdapter.ACTION_TECH_DISCOVERED){
-            println("oui2")
-        } else if (action == NfcAdapter.ACTION_TAG_DISCOVERED){
-            println("oui3")
-        } else if (i?.type != null && i.type == "application/$packageName") {
-            println("oui4")
-        }else{
-            println("non")
+            NfcManagement.writeUriInTag(applicationContext, tagFromIntent, content)
         }
     }
 }

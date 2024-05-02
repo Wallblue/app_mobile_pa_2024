@@ -17,4 +17,7 @@
     <string name="LoginErr">Login Impossible</string>
     <string name="UsersLoadingErr">Failed to load users</string>
     <string name="Err">Something went wrong</string>
+    <string name="NoWritingErr">Writing is impossible</string>
+    <string name="NoSpaceTagErr">No more space in tag</string>
+    <string name="Written">Written</string>
 </resources>
