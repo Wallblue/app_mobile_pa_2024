@@ -7,8 +7,14 @@
     <string name="BadCredentials">Invalid credentials</string>
     <string name="AssignNFC">Assign a volunteer to a NFC tag</string>
     <string name="ChooseVolunteer">Choose a volunteer</string>
+    <string name="Save">Save on the tag</string>
+    <string name="NFCIcon">NFC Icon</string>
+    <string name="ScanNFC">Please scan your tag</string>
+    <string name="FirstName">FirstName</string>
+    <string name="Name">Name</string>
 
     <!-- ERRORS -->
     <string name="LoginErr">Login Impossible</string>
     <string name="UsersLoadingErr">Failed to load users</string>
+    <string name="Err">Something went wrong</string>
 </resources>
