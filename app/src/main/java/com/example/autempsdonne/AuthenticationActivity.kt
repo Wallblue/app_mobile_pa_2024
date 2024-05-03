@@ -41,19 +41,19 @@ class AuthenticationActivity : AppCompatActivity() {
             val queue = Volley.newRequestQueue(this)
             val req = JsonObjectRequest(
                 Request.Method.POST, url, reqBody,
-                {content ->
-                    println(content)
-                    if(!content.getBoolean("success"))
+                {
+                    println(it)
+                    if(!it.getBoolean("success"))
                         Toast.makeText(applicationContext, R.string.BadCredentials, Toast.LENGTH_LONG).show()
                     else{
-                        getSharedPreferences("autempsdonne", MODE_PRIVATE).edit().putString("token", content.getString("jwt")).apply()
+                        getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE).edit().putString("token", it.getString("jwt")).apply()
                         val i = Intent(this, HomeActivity::class.java)
                         startActivity(i)
                     }
                 },
-                {error ->
-                    if(error.message != null)
-                        Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
+                {
+                    if(it.message != null)
+                        Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
                     else
                         Toast.makeText(applicationContext, R.string.LoginErr, Toast.LENGTH_LONG).show()
                 }
