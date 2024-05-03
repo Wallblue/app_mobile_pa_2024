@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 class AssignNfcActivity : AppCompatActivity() {
     private var nfcAdapter: NfcAdapter? = null
     private var pendingIntent: PendingIntent? = null
-    private var content: String? = null
+    private var contentToWrite: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,7 +24,7 @@ class AssignNfcActivity : AppCompatActivity() {
             insets
         }
 
-        this.content = intent.getStringExtra("content")
+        this.contentToWrite = API_URL_ROOT + "volunteer/" + intent.getLongExtra("volunteerId", 0) + "/slim"
 
         this.nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         this.nfcAdapter?.let {
@@ -53,7 +53,7 @@ class AssignNfcActivity : AppCompatActivity() {
             // We get the scanned tag
             val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
 
-            NfcManagement.writeUriInTag(applicationContext, tagFromIntent, content)
+            NfcManagement.writeUriInTag(applicationContext, tagFromIntent, contentToWrite)
         }
     }
 }

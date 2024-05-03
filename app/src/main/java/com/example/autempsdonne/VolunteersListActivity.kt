@@ -66,7 +66,7 @@ class VolunteersListActivity : AppCompatActivity() {
 
                     val i = Intent(applicationContext, AssignNfcActivity::class.java)
 
-                    i.putExtra("content", item.url)
+                    i.putExtra("volunteerId", item.id)
 
                     startActivity(i)
                 }
@@ -75,7 +75,7 @@ class VolunteersListActivity : AppCompatActivity() {
                 if(error.message != null)
                     Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
                 else
-                    Toast.makeText(applicationContext, R.string.UsersLoadingErr, Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, R.string.VolunteersLoadingErr, Toast.LENGTH_LONG).show()
 
                 finish()
             }

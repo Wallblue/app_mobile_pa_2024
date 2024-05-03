@@ -56,10 +56,11 @@ class ReadNfcActivity : AppCompatActivity() {
             val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
 
             val res = NfcManagement.readTag(intent, tagFromIntent).replace("\u0004", "https://")
+            val regex = Regex(API_URL_ROOT + "volunteer/\\d+/slim ")
 
-            if(URLUtil.isValidUrl(res) && res.contains(API_URL_ROOT)){
+            if(URLUtil.isValidUrl(res) && res.matches(regex)){
                 val i = Intent(applicationContext, VolunteersInfoActivity::class.java)
-                i.putExtra("content", res)
+                i.putExtra("uri", res)
                 startActivity(i)
             } else
                 Toast.makeText(applicationContext, R.string.DataErr, Toast.LENGTH_LONG).show()

@@ -16,7 +16,7 @@
 
     <!-- ERRORS -->
     <string name="LoginErr">Connexion Impossible</string>
-    <string name="UsersLoadingErr">Chargement des utilisateurs impossible</string>
+    <string name="VolunteersLoadingErr">Chargement des volontaires impossible</string>
     <string name="Err">Quelque chose s\'est mal passé</string>
     <string name="NoWritingErr">Ecriture impossible</string>
     <string name="NoSpaceTagErr">Aucun espace disponible</string>
@@ -24,4 +24,5 @@
     <string name="ReadNFC">Lire une puce</string>
     <string name="DataErr">Données invalides</string>
     <string name="Volunteer">Volontaire</string>
+    <string name="VolunteerLoadingErr">Chargement du volontaire impossible</string>
 </resources>

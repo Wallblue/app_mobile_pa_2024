@@ -15,7 +15,7 @@
 
     <!-- ERRORS -->
     <string name="LoginErr">Login Impossible</string>
-    <string name="UsersLoadingErr">Failed to load users</string>
+    <string name="VolunteersLoadingErr">Failed to load volunteers</string>
     <string name="Err">Something went wrong</string>
     <string name="NoWritingErr">Writing is impossible</string>
     <string name="NoSpaceTagErr">No more space in tag</string>
@@ -23,4 +23,5 @@
     <string name="ReadNFC">Read a tag</string>
     <string name="DataErr">Invalid Data</string>
     <string name="Volunteer">Volunteer</string>
+    <string name="VolunteerLoadingErr">Failed to load volunteer</string>
 </resources>
