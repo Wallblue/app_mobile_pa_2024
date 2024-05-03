@@ -40,4 +40,7 @@
     <string name="Birthdate">Date de Naissance</string>
     <string name="Site_dots" translatable="false">Site :</string>
     <string name="Address_dots">Adresse :</string>
+    <string name="NullTokenErr">Authentification requise</string>
+    <string name="ForbiddenErr">Accès Interdit</string>
+    <string name="Building">Bâtiment</string>
 </resources>

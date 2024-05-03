@@ -37,4 +37,7 @@
     <string name="Birthdate_dots">Birthdate :</string>
     <string name="Birthdate">Birthdate</string>
     <string name="Address_dots">Address :</string>
+    <string name="NullTokenErr">Authentication required</string>
+    <string name="ForbiddenErr">Forbidden Access</string>
+    <string name="Building">Building</string>
 </resources>
