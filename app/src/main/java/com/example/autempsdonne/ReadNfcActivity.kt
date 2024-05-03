@@ -64,7 +64,6 @@ class ReadNfcActivity : AppCompatActivity() {
                 startActivity(i)
             } else
                 Toast.makeText(applicationContext, R.string.DataErr, Toast.LENGTH_LONG).show()
-
         }
     }
 }
