@@ -24,4 +24,17 @@
     <string name="DataErr">Invalid Data</string>
     <string name="Volunteer">Volunteer</string>
     <string name="VolunteerLoadingErr">Failed to load volunteer</string>
+    <string name="Profile">Profile</string>
+    <string name="EmailAddress">Email Address</string>
+    <string name="PhoneNb">Phone Number</string>
+    <string name="Address">Address</string>
+    <string name="Street">Street</string>
+    <string name="HouseNb">House Number</string>
+    <string name="City">City</string>
+    <string name="Zipcode">Zip Code</string>
+    <string name="BuildingNb">Building Number</string>
+    <string name="Username">Username</string>
+    <string name="Birthdate_dots">Birthdate :</string>
+    <string name="Birthdate">Birthdate</string>
+    <string name="Address_dots">Address :</string>
 </resources>

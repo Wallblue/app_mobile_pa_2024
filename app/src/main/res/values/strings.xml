@@ -25,4 +25,19 @@
     <string name="DataErr">Données invalides</string>
     <string name="Volunteer">Volontaire</string>
     <string name="VolunteerLoadingErr">Chargement du volontaire impossible</string>
+    <string name="Profile">Profil</string>
+    <string name="EmailAddress">Addresse Email</string>
+    <string name="PhoneNb">Numéro de téléphone</string>
+    <string name="Address">Adresse</string>
+    <string name="Street">Rue</string>
+    <string name="HouseNb">Numéro d\'adresse</string>
+    <string name="City">Ville</string>
+    <string name="Zipcode">Code Postal</string>
+    <string name="BuildingNb">Bâtiment</string>
+    <string name="Site" translatable="false">Site</string>
+    <string name="Username">Nom d\'utilisateur</string>
+    <string name="Birthdate_dots">Date de Naissance :</string>
+    <string name="Birthdate">Date de Naissance</string>
+    <string name="Site_dots" translatable="false">Site :</string>
+    <string name="Address_dots">Adresse :</string>
 </resources>

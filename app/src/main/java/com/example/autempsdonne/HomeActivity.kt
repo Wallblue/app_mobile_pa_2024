@@ -24,11 +24,12 @@ class HomeActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "b1", Toast.LENGTH_SHORT).show()
         }
 
-        findViewById<Button>(R.id.home_btn2).setOnClickListener{
-            Toast.makeText(applicationContext, "b2", Toast.LENGTH_SHORT).show()
+        findViewById<Button>(R.id.home_profile_btn).setOnClickListener{
+            val i = Intent(this, UserProfileActivity::class.java)
+            startActivity(i)
         }
 
-        findViewById<Button>(R.id.home_read_nfc).setOnClickListener{
+        findViewById<Button>(R.id.home_read_nfc_btn).setOnClickListener{
             val i = Intent(this, ReadNfcActivity::class.java)
             startActivity(i)
         }

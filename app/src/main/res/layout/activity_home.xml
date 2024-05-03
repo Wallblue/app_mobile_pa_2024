@@ -37,17 +37,17 @@
         />
 
         <Button
-            android:id="@+id/home_btn2"
+            android:id="@+id/home_profile_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="b2"
+            android:text="@string/Profile"
             android:layout_marginBottom="15sp"
             android:height="65sp"
             android:width="500dp"
         />
 
         <Button
-            android:id="@+id/home_read_nfc"
+            android:id="@+id/home_read_nfc_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ReadNFC"
