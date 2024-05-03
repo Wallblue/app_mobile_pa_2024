@@ -21,4 +21,6 @@
     <string name="NoSpaceTagErr">No more space in tag</string>
     <string name="Written">Written</string>
     <string name="ReadNFC">Read a tag</string>
+    <string name="DataErr">Invalid Data</string>
+    <string name="Volunteer">Volunteer</string>
 </resources>

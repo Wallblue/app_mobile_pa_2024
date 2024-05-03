@@ -5,6 +5,7 @@ import android.content.Intent
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.os.Bundle
+import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -54,8 +55,15 @@ class ReadNfcActivity : AppCompatActivity() {
             // We get the scanned tag
             val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
 
-            val res = NfcManagement.readTag(intent, tagFromIntent)
-            Toast.makeText(applicationContext, res, Toast.LENGTH_LONG).show()
+            val res = NfcManagement.readTag(intent, tagFromIntent).replace("\u0004", "https://")
+
+            if(URLUtil.isValidUrl(res) && res.contains(API_URL_ROOT)){
+                val i = Intent(applicationContext, VolunteersInfoActivity::class.java)
+                i.putExtra("content", res)
+                startActivity(i)
+            } else
+                Toast.makeText(applicationContext, R.string.DataErr, Toast.LENGTH_LONG).show()
+
         }
     }
 }

@@ -44,7 +44,7 @@ class NfcManagement {
             if (messages != null)
                 for (message in messages)
                     for(record in message.records)
-                        res += String(record.payload, Charsets.UTF_8)
+                        res += String(record.payload, Charsets.UTF_8) + " "
             return res
         }
 
