@@ -55,7 +55,9 @@ class ReadNfcActivity : AppCompatActivity() {
             val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
 
             val res = NfcManagement.readTag(intent, tagFromIntent)
-            Toast.makeText(applicationContext, res, Toast.LENGTH_LONG).show()
+            val i = Intent(applicationContext, /*TODO add intent*/ HomeActivity::class.java)
+            i.putExtra("content", res)
+            startActivity(i)
         }
     }
 }
