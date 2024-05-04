@@ -188,4 +188,14 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
         zipcodeTv?.text = address.zipcode.toString()
         cityTv?.text = address.city
     }
+
+    override fun defineBaseAddress(): Address {
+        return Address(
+            houseNumberTv?.text.toString(),
+            streetTv?.text.toString(),
+            buildingNumberTv?.text.toString(),
+            zipcodeTv?.text.toString().toInt(),
+            cityTv?.text.toString()
+        )
+    }
 }
