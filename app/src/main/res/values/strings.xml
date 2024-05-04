@@ -8,7 +8,7 @@
     <string name="BadCredentials">Identifiants invalides</string>
     <string name="AssignNFC">Assigner un bénévole à un tag NFC</string>
     <string name="ChooseVolunteer">Choisissez un bénévole</string>
-    <string name="Save">Enregistrer sur le tag</string>
+    <string name="SaveTag">Enregistrer sur le tag</string>
     <string name="NFCIcon">Icône NFC</string>
     <string name="ScanNFC">S\'il vous plaît, scannez votre tag</string>
     <string name="FirstName">Prénom</string>
@@ -43,4 +43,6 @@
     <string name="NullTokenErr">Authentification requise</string>
     <string name="ForbiddenErr">Accès Interdit</string>
     <string name="Building">Bâtiment</string>
+    <string name="Edit">Modifier</string>
+    <string name="Save">Sauvegarder</string>
 </resources>

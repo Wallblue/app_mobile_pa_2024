@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:visibility="gone"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserProfileActivity"
@@ -46,6 +47,7 @@
             android:minWidth="150dp"
             android:minHeight="48dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/black"
         />
 
         <EditText
@@ -59,6 +61,7 @@
             android:minWidth="150dp"
             android:minHeight="48dp"
             android:textSize="20sp"
+            android:textColor="@color/design_default_color_on_primary"
         />
     </LinearLayout>
 
@@ -96,7 +99,6 @@
         android:layout_marginBottom="10dp"
         >
         <TextView
-            android:id="@+id/profile_birthdate_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Birthdate_dots"
@@ -106,14 +108,10 @@
             android:layout_marginEnd="15dp"
         />
 
-        <EditText
-            android:id="@+id/profile_birthdate_ed"
+        <TextView
+            android:id="@+id/profile_birthdate_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/Birthdate"
-            android:autofillHints="name"
-            android:inputType="textPersonName"
-            android:enabled="false"
             android:minHeight="48dp"
             android:textSize="20sp"
         />
@@ -144,7 +142,6 @@
                 android:id="@+id/profile_houseNb_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="14"
                 android:textSize="20sp"
                 android:layout_marginEnd="15dp"
             />
@@ -152,7 +149,6 @@
                 android:id="@+id/profile_street_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="rue des Lilas"
                 android:textSize="20sp"
             />
         </LinearLayout>
@@ -166,11 +162,9 @@
                 android:id="@+id/profile_buildingNb_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bâtiment A"
                 android:textSize="20sp"
                 />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -181,7 +175,6 @@
                 android:id="@+id/profile_zipcode_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="92000"
                 android:textSize="20sp"
                 android:layout_marginEnd="15dp"
             />
@@ -189,7 +182,6 @@
                 android:id="@+id/profile_city_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nanterre"
                 android:textSize="20sp"
             />
         </LinearLayout>
@@ -223,5 +215,31 @@
             android:minHeight="48dp"
             android:textSize="20sp"
             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom"
+    >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+        >
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+            />
+            <Button
+                android:id="@+id/profile_edit_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/Edit"
+                android:layout_weight="0.5"
+            />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
