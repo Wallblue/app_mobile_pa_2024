@@ -19,7 +19,7 @@ import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class UserProfileActivity : AppCompatActivity() {
+class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
     private var usernameTv : TextView? = null
     private var firstnameEd : EditText? = null
     private var nameEd : EditText? = null
@@ -179,5 +179,13 @@ class UserProfileActivity : AppCompatActivity() {
             Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         )
         datePicker.show()
+    }
+
+    override fun onAddressUpdate(address: Address) {
+        houseNumberTv?.text = address.houseNumber
+        streetTv?.text = address.street
+        buildingNumberTv?.text = address.buildingNumber
+        zipcodeTv?.text = address.zipcode.toString()
+        cityTv?.text = address.city
     }
 }
