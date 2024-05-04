@@ -86,6 +86,13 @@ class UserProfileActivity : AppCompatActivity() {
 
                     this.openCalendarModal()
                 }
+
+                // We set the address editor listener
+                addressLl?.setOnClickListener {
+                    if(!this.editMode) return@setOnClickListener
+
+                    EditAddressDialogFragment().show(supportFragmentManager, "EditAddressDialog")
+                }
             },
             {
                 if(it.message != null)

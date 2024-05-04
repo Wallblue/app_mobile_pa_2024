@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/dialog_houseNb_ed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="name"
+        android:hint="@string/HouseNb"
+        android:inputType="text"
+        android:minWidth="150dp"
+        android:minHeight="48dp"
+        android:textColorHint="@color/beige"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/dialog_street_ed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="name"
+        android:hint="@string/Street"
+        android:inputType="textPersonName"
+        android:minWidth="150dp"
+        android:minHeight="48dp"
+        android:textColorHint="@color/beige"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/dialog_buildingNb_ed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="name"
+        android:hint="@string/BuildingNb"
+        android:inputType="text"
+        android:minWidth="150dp"
+        android:minHeight="48dp"
+        android:textColorHint="@color/beige"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/dialog_zipcode_ed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="zipcode"
+        android:hint="@string/Zipcode"
+        android:inputType="numberDecimal"
+        android:minWidth="150dp"
+        android:minHeight="48dp"
+        android:textColorHint="@color/beige"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/dialog_city_ed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="name"
+        android:hint="@string/City"
+        android:inputType="text"
+        android:minWidth="150dp"
+        android:minHeight="48dp"
+        android:textColorHint="@color/beige"
+        android:textSize="20sp" />
+
+</LinearLayout>
