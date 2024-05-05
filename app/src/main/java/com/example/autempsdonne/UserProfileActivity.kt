@@ -13,8 +13,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.android.volley.toolbox.StringRequest
+import com.android.volley.Request.Method
+import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
+import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -36,6 +38,13 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
     private var editBtn : Button? = null
 
     private var editMode : Boolean = false
+
+    private var token : String? = ""
+    private var authLevel : AuthLevels? = null
+    private var queue : RequestQueue? = null
+    private var url : String = ""
+    private var userInfo : JSONObject? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -46,30 +55,35 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
             insets
         }
 
-        val token = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE).getString("token", "")
-        if(token == null){
+        this.token = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE).getString("token", "")
+
+        if(this.token == null){
             Toast.makeText(applicationContext, R.string.NullTokenErr, Toast.LENGTH_LONG).show()
             finish()
         }
-        val decoded = Utils.getAuthLevel(token!!)
+        this.authLevel = Utils.getAuthLevel(this.token!!)
 
-        if( decoded == null || decoded == AuthLevels.CHILD || decoded == AuthLevels.PARTNER ){
+        if( this.authLevel == null || this.authLevel == AuthLevels.CHILD || this.authLevel == AuthLevels.PARTNER ){
             Toast.makeText(applicationContext, R.string.ForbiddenErr, Toast.LENGTH_LONG).show()
             finish()
         }
 
         this.getViewElements()
 
-        val uri = API_URL_ROOT + (if (decoded == AuthLevels.BENEFICIARY) "beneficiary" else "volunteer") + "/profile/me"
+        this.url = API_URL_ROOT + (if (this.authLevel == AuthLevels.BENEFICIARY) "beneficiary" else "volunteer") + "/profile/me"
 
-        val queue = Volley.newRequestQueue(this)
-        val req = object : StringRequest(
+        this.queue = Volley.newRequestQueue(this)
+        val req = AuthStringRequest(
             Method.GET,
-            uri,
+            this.url,
+            this.token!!,
             {
-                val userInfo = if (decoded != AuthLevels.BENEFICIARY) JSONObject(it).getJSONObject("user") else JSONObject(it)
+                this.userInfo = JSONObject(it) //if (this.authLevel != AuthLevels.BENEFICIARY) JSONObject(it).getJSONObject("user") else JSONObject(it)
 
-                this.setViewElementsValue(userInfo)
+                if (this.authLevel == AuthLevels.BENEFICIARY)
+                    this.setViewElementsValue(userInfo!!)
+                else
+                    this.setViewElementsValue(userInfo!!.getJSONObject("user"))
 
                 // When we have set all the data we set the total layout to visible
                 findViewById<LinearLayout>(R.id.main).visibility = View.VISIBLE
@@ -102,14 +116,9 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
 
                 finish()
             }
-        ) {
-            override fun getHeaders(): MutableMap<String, String> {
-                val headers = HashMap<String, String>()
-                headers["Authorization"] = token
-                return headers
-            }
-        }
-        queue.add(req)
+        )
+
+        this.queue?.add(req)
 
     }
 
@@ -139,8 +148,7 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
         birthdateTv?.text = userInfo.getString("birthdate")
         houseNumberTv?.text = userInfo.getString("houseNumber")
         streetTv?.text = userInfo.getString("street")
-        val building = getString(R.string.Building) + " " + userInfo.getString("buildingNumber")
-        buildingNumberTv?.text = building
+        buildingNumberTv?.text = userInfo.getString("buildingNumber")
         zipcodeTv?.text = userInfo.getInt("zipcode").toString()
         cityTv?.text = userInfo.getString("city")
         siteEd?.setText(userInfo.getJSONObject("site").getString("name"))
@@ -149,10 +157,10 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
     private fun changeEditTextsStatus(status: Boolean){
         firstnameEd?.isEnabled = status
         nameEd?.isEnabled = status
-        emailEd?.isEnabled = status
-        phoneEd?.isEnabled = status
+        //emailEd?.isEnabled = status
+        //phoneEd?.isEnabled = status
         birthdateTv?.isEnabled = status
-        siteEd?.isEnabled = status
+        //siteEd?.isEnabled = status
     }
 
     private fun switchEditMode(){
@@ -163,7 +171,81 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
         this.changeEditTextsStatus(this.editMode)
 
         // And we change text according to editMode state
-        editBtn?.text = if(this.editMode) getString(R.string.Save) else getString(R.string.Edit)
+        if (this.editMode)
+            editBtn?.text = getString(R.string.Save)
+        else {
+            this.sendSaveRequest()
+            editBtn?.text = getString(R.string.Edit)
+        }
+    }
+
+    private fun sendSaveRequest() {
+        val body = makeSaveRequestBody()
+        val saveReq = AuthJsonObjectRequest(
+            Method.PATCH,
+            this.url,
+            body,
+            this.token!!,
+            {
+                Toast.makeText(applicationContext, R.string.SaveSuccess, Toast.LENGTH_LONG).show()
+
+                // We need to update the user info TODO
+
+            },
+            {
+                if(it.message != null)
+                    Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
+                else
+                    Toast.makeText(applicationContext, R.string.SaveErr, Toast.LENGTH_LONG).show()
+
+                println(String(it.networkResponse.data))
+
+                // If there's an error we reset the values
+                if (this.authLevel == AuthLevels.BENEFICIARY)
+                    this.setViewElementsValue(userInfo!!)
+                else
+                    this.setViewElementsValue(userInfo!!.getJSONObject("user"))
+            }
+        )
+        queue?.add(saveReq)
+    }
+
+    private fun makeSaveRequestBody() : JSONObject{
+        return JSONObject().apply {
+            // Things we change
+            put("name", nameEd?.text.toString())
+            put("firstName", firstnameEd?.text.toString())
+            put("birthdate", birthdateTv?.text.toString())
+            put("email", emailEd?.text.toString())
+            put("phone", phoneEd?.text.toString())
+            put("street", streetTv?.text.toString())
+            put("houseNumber", houseNumberTv?.text.toString())
+            put("city", cityTv?.text.toString())
+            put("zipcode", zipcodeTv?.text.toString().toInt())
+            put("buildingNumber", buildingNumberTv?.text.toString())
+
+            // Things we don't change
+
+            if(authLevel == AuthLevels.VOLUNTEER || authLevel == AuthLevels.ADMIN){
+                put("siteId", userInfo?.getJSONObject("user")?.getJSONObject("site")?.getLong("id"))
+                put("license", userInfo?.getJSONObject("volunteer")?.getInt("license"))
+                put("licenseTruck", userInfo?.getJSONObject("volunteer")?.getInt("licenseTruck"))
+                put("disponibilityAmount", userInfo?.getJSONObject("volunteer")?.getInt("disponibilityAmount"))
+                put("disponibilityType", userInfo?.getJSONObject("volunteer")?.getInt("disponibilityType"))
+
+                val availabilitiesArray = userInfo?.getJSONArray("disponibilities")
+                val availabilities = IntArray(availabilitiesArray!!.length())
+
+                for(i in 0 until availabilitiesArray.length())
+                    availabilities[i] = availabilitiesArray
+                        .getJSONArray(i)
+                        .getJSONObject(0)
+                        .getInt("disponibility")
+                put("disponibilities", JSONArray(availabilities))
+            } else
+                put("siteId", userInfo?.getJSONObject("site")?.getLong("id"))
+
+        }
     }
 
     private fun openCalendarModal(){
@@ -172,7 +254,7 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
             { _, year, month, dayOfMonth ->
                 val calendar = Calendar.getInstance()
                 calendar.set(year, month, dayOfMonth)
-                birthdateTv?.text = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(calendar.time)
+                birthdateTv?.text = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(calendar.time)
             },
             Calendar.getInstance().get(Calendar.YEAR),
             Calendar.getInstance().get(Calendar.MONTH),

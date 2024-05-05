@@ -48,4 +48,6 @@
     <string name="EditAddress">Modification de l\'adresse</string>
     <string name="OK" translatable="false">OK</string>
     <string name="Cancel">Annuler</string>
+    <string name="SaveErr">Sauvegarde échouée</string>
+    <string name="SaveSuccess">Sauvegarde réussie</string>
 </resources>

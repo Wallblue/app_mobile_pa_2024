@@ -47,7 +47,6 @@
             android:minWidth="150dp"
             android:minHeight="48dp"
             android:layout_marginEnd="15dp"
-            android:textColor="@color/black"
         />
 
         <EditText
@@ -61,7 +60,6 @@
             android:minWidth="150dp"
             android:minHeight="48dp"
             android:textSize="20sp"
-            android:textColor="@color/design_default_color_on_primary"
         />
     </LinearLayout>
 
@@ -158,6 +156,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
         >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Building"
+                android:layout_marginEnd="15dp"
+                android:textSize="20sp"
+                />
             <TextView
                 android:id="@+id/profile_buildingNb_tv"
                 android:layout_width="wrap_content"

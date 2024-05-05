@@ -44,4 +44,6 @@
     <string name="Save">Save</string>
     <string name="EditAddress">Address edition</string>
     <string name="Cancel">Cancel</string>
+    <string name="SaveErr">Save has failed</string>
+    <string name="SaveSuccess">Save succeed</string>
 </resources>
