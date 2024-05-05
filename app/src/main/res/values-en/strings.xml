@@ -49,4 +49,11 @@
     <string name="CancelAsk">Cancel all the changes ?</string>
     <string name="Yes">Yes</string>
     <string name="No">No</string>
+    <string name="ProductImg">Product Image</string>
+    <string name="ExpiryDateDots">"Expiry date : "</string>
+    <string name="QuantityDots">"Quantity : "</string>
+    <string name="StoragesDots">"Storages : "</string>
+    <string name="NameDots">"Name : "</string>
+    <string name="UnitSizeDots">"Unit size : "</string>
+    <string name="GatheringDots">"Gathering : "</string>
 </resources>

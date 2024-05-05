@@ -16,25 +16,24 @@
         android:theme="@style/Theme.AuTempsDonne"
         tools:targetApi="31">
         <activity
+            android:name=".ProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserProfileActivity"
             android:exported="false"
-            android:screenOrientation="sensorPortrait"
-        />
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".VolunteersInfoActivity"
             android:exported="false"
-            android:screenOrientation="sensorPortrait"
-        />
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".ReadNfcActivity"
             android:exported="false"
-            android:screenOrientation="sensorPortrait"
-        />
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".AssignNfcActivity"
             android:exported="false"
-            android:screenOrientation="sensorPortrait"
-        >
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -44,18 +43,15 @@
         <activity
             android:name=".VolunteersListActivity"
             android:exported="false"
-            android:screenOrientation="sensorPortrait"
-        />
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".HomeActivity"
             android:exported="false"
-            android:screenOrientation="sensorPortrait"
-        />
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".AuthenticationActivity"
             android:exported="true"
-            android:screenOrientation="sensorPortrait"
-        >
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

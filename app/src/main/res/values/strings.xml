@@ -53,4 +53,13 @@
     <string name="CancelAsk">Annuler tous les changements ?</string>
     <string name="Yes">Oui</string>
     <string name="No">Non</string>
+    <string name="ProductImg">Image du produit</string>
+    <string name="IdDots" translatable="false">"ID : "</string>
+    <string name="ExpiryDateDots">"Date d'expiration : "</string>
+    <string name="QuantityDots">Quantité : </string>
+    <string name="TypeDots" translatable="false">"Type : "</string>
+    <string name="StoragesDots">Stockages : </string>
+    <string name="NameDots">"Nom : "</string>
+    <string name="UnitSizeDots">"Taille unitaire : "</string>
+    <string name="GatheringDots">"Récolte : "</string>
 </resources>
