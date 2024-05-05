@@ -50,4 +50,7 @@
     <string name="Cancel">Annuler</string>
     <string name="SaveErr">Sauvegarde échouée</string>
     <string name="SaveSuccess">Sauvegarde réussie</string>
+    <string name="CancelAsk">Annuler tous les changements ?</string>
+    <string name="Yes">Oui</string>
+    <string name="No">Non</string>
 </resources>

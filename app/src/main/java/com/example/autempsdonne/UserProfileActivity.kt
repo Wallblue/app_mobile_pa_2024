@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -36,6 +37,8 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
     private var cityTv : TextView? = null
     private var siteEd : EditText? = null
     private var editBtn : Button? = null
+    private var buttonsV : View? = null
+    private var cancelBtn : Button? = null
 
     private var editMode : Boolean = false
 
@@ -80,10 +83,7 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
             {
                 this.userInfo = JSONObject(it) //if (this.authLevel != AuthLevels.BENEFICIARY) JSONObject(it).getJSONObject("user") else JSONObject(it)
 
-                if (this.authLevel == AuthLevels.BENEFICIARY)
-                    this.setViewElementsValue(userInfo!!)
-                else
-                    this.setViewElementsValue(userInfo!!.getJSONObject("user"))
+                resetLayoutValues()
 
                 // When we have set all the data we set the total layout to visible
                 findViewById<LinearLayout>(R.id.main).visibility = View.VISIBLE
@@ -91,6 +91,18 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
                 // We set the edit mode button listener
                 editBtn?.setOnClickListener {
                     this.switchEditMode()
+                }
+
+                // We set the cancel button listener
+                cancelBtn?.setOnClickListener {
+                    AlertDialog.Builder(this)
+                        .setMessage(R.string.CancelAsk)
+                        .setPositiveButton(R.string.Yes) { _, _ ->
+                            resetLayoutValues()
+                            switchEditMode(true)
+                        }
+                        .setNegativeButton(R.string.No) { dialog, _ -> dialog.dismiss() }
+                        .show()
                 }
 
                 // We set the birthdate editor listener
@@ -119,7 +131,6 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
         )
 
         this.queue?.add(req)
-
     }
 
     private fun getViewElements(){
@@ -137,6 +148,8 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
         cityTv = findViewById(R.id.profile_city_tv)
         siteEd = findViewById(R.id.profile_site_ed)
         editBtn = findViewById(R.id.profile_edit_btn)
+        buttonsV = findViewById(R.id.profile_buttons_v)
+        cancelBtn = findViewById(R.id.profile_cancel_btn)
     }
 
     private fun setViewElementsValue(userInfo: JSONObject){
@@ -157,13 +170,13 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
     private fun changeEditTextsStatus(status: Boolean){
         firstnameEd?.isEnabled = status
         nameEd?.isEnabled = status
+        birthdateTv?.isEnabled = status
         //emailEd?.isEnabled = status
         //phoneEd?.isEnabled = status
-        birthdateTv?.isEnabled = status
         //siteEd?.isEnabled = status
     }
 
-    private fun switchEditMode(){
+    private fun switchEditMode(isCancellation : Boolean = false){
         // Switch edit mode
         this.editMode = !this.editMode
 
@@ -171,11 +184,16 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
         this.changeEditTextsStatus(this.editMode)
 
         // And we change text according to editMode state
-        if (this.editMode)
+        if (this.editMode){
             editBtn?.text = getString(R.string.Save)
+
+            switchCancelButtonState()
+        }
         else {
-            this.sendSaveRequest()
+            if(!isCancellation) this.sendSaveRequest()
             editBtn?.text = getString(R.string.Edit)
+
+            switchCancelButtonState()
         }
     }
 
@@ -189,8 +207,10 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
             {
                 Toast.makeText(applicationContext, R.string.SaveSuccess, Toast.LENGTH_LONG).show()
 
-                // We need to update the user info TODO
-
+                if (this.authLevel == AuthLevels.BENEFICIARY)
+                    this.updateUserInfo(userInfo!!)
+                else
+                    this.updateUserInfo(userInfo!!.getJSONObject("user"))
             },
             {
                 if(it.message != null)
@@ -201,10 +221,7 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
                 println(String(it.networkResponse.data))
 
                 // If there's an error we reset the values
-                if (this.authLevel == AuthLevels.BENEFICIARY)
-                    this.setViewElementsValue(userInfo!!)
-                else
-                    this.setViewElementsValue(userInfo!!.getJSONObject("user"))
+                resetLayoutValues()
             }
         )
         queue?.add(saveReq)
@@ -248,19 +265,47 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
         }
     }
 
+    private fun updateUserInfo(info : JSONObject){
+        info.apply {
+            put("name", nameEd?.text.toString())
+            put("firstName", firstnameEd?.text.toString())
+            put("birthdate", birthdateTv?.text.toString())
+            put("email", emailEd?.text.toString())
+            put("phone", phoneEd?.text.toString())
+            put("street", streetTv?.text.toString())
+            put("houseNumber", houseNumberTv?.text.toString())
+            put("city", cityTv?.text.toString())
+            put("zipcode", zipcodeTv?.text.toString().toInt())
+            put("buildingNumber", buildingNumberTv?.text.toString())
+        }
+    }
+
+    private fun resetLayoutValues(){
+        if (this.authLevel == AuthLevels.BENEFICIARY)
+            this.setViewElementsValue(userInfo!!)
+        else
+            this.setViewElementsValue(userInfo!!.getJSONObject("user"))
+    }
+
     private fun openCalendarModal(){
         val datePicker = DatePickerDialog(
             this,
             { _, year, month, dayOfMonth ->
                 val calendar = Calendar.getInstance()
                 calendar.set(year, month, dayOfMonth)
-                birthdateTv?.text = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(calendar.time)
+                birthdateTv?.text = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
             },
             Calendar.getInstance().get(Calendar.YEAR),
             Calendar.getInstance().get(Calendar.MONTH),
             Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         )
         datePicker.show()
+    }
+
+    private fun switchCancelButtonState(){
+        val temp = this.buttonsV?.visibility
+        this.buttonsV?.visibility = this.cancelBtn?.visibility!!
+        this.cancelBtn?.visibility = temp!!
     }
 
     override fun onAddressUpdate(address: Address) {

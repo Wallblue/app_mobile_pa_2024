@@ -46,4 +46,7 @@
     <string name="Cancel">Cancel</string>
     <string name="SaveErr">Save has failed</string>
     <string name="SaveSuccess">Save succeed</string>
+    <string name="CancelAsk">Cancel all the changes ?</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
 </resources>
