@@ -62,4 +62,6 @@
     <string name="NameDots">"Nom : "</string>
     <string name="UnitSizeDots">"Taille unitaire : "</string>
     <string name="GatheringDots">"Récolte : "</string>
+    <string name="NeedCameraErr">La caméra est nécessaire pour cette action</string>
+    <string name="ScanQR">Scanner un QR Code</string>
 </resources>

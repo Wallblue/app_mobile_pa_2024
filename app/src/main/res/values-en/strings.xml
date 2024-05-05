@@ -56,4 +56,6 @@
     <string name="NameDots">"Name : "</string>
     <string name="UnitSizeDots">"Unit size : "</string>
     <string name="GatheringDots">"Gathering : "</string>
+    <string name="NeedCameraErr">The camera is needed to continue</string>
+    <string name="ScanQR">Scan a QR Code</string>
 </resources>
