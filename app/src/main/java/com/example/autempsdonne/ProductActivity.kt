@@ -17,6 +17,7 @@ class ProductActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         val tv = findViewById<TextView>(R.id.product_id_tv)
         tv.text = intent.getStringExtra(QRScanActivity.EXTRA_QR)
     }

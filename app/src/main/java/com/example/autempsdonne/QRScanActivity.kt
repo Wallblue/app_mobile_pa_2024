@@ -6,10 +6,10 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.util.forEach
 import androidx.core.util.isNotEmpty
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
@@ -19,13 +19,16 @@ import com.google.android.gms.vision.barcode.BarcodeDetector
 class QRScanActivity : AppCompatActivity() {
 
     companion object {
-        const val EXTRA_QR = "scannedQR"
+        const val EXTRA_QR = "productLink"
         private const val CAMERA_REQUEST_CODE = 1
     }
 
     private lateinit var scanSv: SurfaceView
     private lateinit var qrDetector: BarcodeDetector
     private lateinit var cameraSource: CameraSource
+
+    private var badQrCode : Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qrscan)
@@ -41,6 +44,12 @@ class QRScanActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         qrDetector.release()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(badQrCode)
+            Toast.makeText(applicationContext, R.string.InvalidQrErr, Toast.LENGTH_LONG).show()
     }
 
     override fun onRequestPermissionsResult(
@@ -71,6 +80,7 @@ class QRScanActivity : AppCompatActivity() {
 
         initCameraSource()
         initScanSurfaceView()
+        Toast.makeText(this@QRScanActivity, "1", Toast.LENGTH_LONG).show()
 
         qrDetector.setProcessor(object: Detector.Processor<Barcode> {
             override fun release() { }
@@ -83,19 +93,26 @@ class QRScanActivity : AppCompatActivity() {
                     if (qrCode.displayValue.isNotEmpty())
                         onQrScan(qrCode.displayValue)
                 }
-                    /*qrCodes.forEach { _, qrCode ->
-                        if (qrCode.displayValue.isNotEmpty())
-                            onQrScan(qrCode.displayValue)
-                    }*/
             }
 
         })
     }
 
     private fun onQrScan(displayValue: String) {
-        val i = Intent(this, ProductActivity::class.java)
-        i.putExtra(EXTRA_QR, displayValue)
-        startActivity(i)
+        if (isProductLink(displayValue)) {
+            val i = Intent(this, ProductActivity::class.java)
+            i.putExtra(EXTRA_QR, displayValue)
+            startActivity(i)
+        } else {
+            this.badQrCode = true
+            finish()
+        }
+    }
+
+    private fun isProductLink(value: String): Boolean {
+        val regex = Regex(API_URL_ROOT + "addresses/warehouses/products/[1-9]\\d*")
+
+        return URLUtil.isValidUrl(value) && value.matches(regex)
     }
 
     private fun initCameraSource() {

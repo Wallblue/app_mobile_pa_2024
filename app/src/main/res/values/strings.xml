@@ -64,4 +64,5 @@
     <string name="GatheringDots">"Récolte : "</string>
     <string name="NeedCameraErr">La caméra est nécessaire pour cette action</string>
     <string name="ScanQR">Scanner un QR Code</string>
+    <string name="InvalidQrErr">QR code invalide</string>
 </resources>
