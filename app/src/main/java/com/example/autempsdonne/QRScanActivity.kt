@@ -80,7 +80,6 @@ class QRScanActivity : AppCompatActivity() {
 
         initCameraSource()
         initScanSurfaceView()
-        Toast.makeText(this@QRScanActivity, "1", Toast.LENGTH_LONG).show()
 
         qrDetector.setProcessor(object: Detector.Processor<Barcode> {
             override fun release() { }

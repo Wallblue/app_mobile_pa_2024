@@ -124,7 +124,7 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
                 if(it.message != null)
                     Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
                 else
-                    Toast.makeText(applicationContext, R.string.LoginErr, Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, R.string.FailedReqErr, Toast.LENGTH_LONG).show()
 
                 finish()
             }

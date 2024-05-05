@@ -56,7 +56,7 @@
     <string name="ProductImg">Image du produit</string>
     <string name="IdDots" translatable="false">"ID : "</string>
     <string name="ExpiryDateDots">"Date d'expiration : "</string>
-    <string name="QuantityDots">Quantité : </string>
+    <string name="QuantityDots">"Quantité : "</string>
     <string name="TypeDots" translatable="false">"Type : "</string>
     <string name="StoragesDots">Stockages : </string>
     <string name="NameDots">"Nom : "</string>
@@ -65,4 +65,5 @@
     <string name="NeedCameraErr">La caméra est nécessaire pour cette action</string>
     <string name="ScanQR">Scanner un QR Code</string>
     <string name="InvalidQrErr">QR code invalide</string>
+    <string name="FailedReqErr">Requête échouée</string>
 </resources>

@@ -8,9 +8,11 @@
     tools:context=".ProductActivity"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:visibility="gone"
 >
 
     <ImageView
+        android:id="@+id/product_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/ProductImg"

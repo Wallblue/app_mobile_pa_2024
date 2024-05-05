@@ -59,4 +59,5 @@
     <string name="NeedCameraErr">The camera is needed to continue</string>
     <string name="ScanQR">Scan a QR Code</string>
     <string name="InvalidQrErr">Invalid QR Code</string>
+    <string name="FailedReqErr">Failed Request</string>
 </resources>
