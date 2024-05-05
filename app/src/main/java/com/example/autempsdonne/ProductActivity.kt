@@ -3,6 +3,7 @@ package com.example.autempsdonne
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.android.volley.Request.Method
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
+import com.bumptech.glide.Glide
 import org.json.JSONObject
 
 class ProductActivity : AppCompatActivity() {
@@ -53,6 +55,11 @@ class ProductActivity : AppCompatActivity() {
             this.token!!,
             {
                 val response = JSONObject(it)
+
+                val imageView = findViewById<ImageView>(R.id.product_img)
+                Glide.with(this)
+                    .load(response.getString("image"))
+                    .into(imageView)
 
                 findViewById<TextView>(R.id.product_id_tv).text = response.getLong("id").toString()
                 findViewById<TextView>(R.id.product_name_tv).text = response.getString("name")
