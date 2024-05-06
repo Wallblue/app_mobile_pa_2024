@@ -44,7 +44,7 @@ class HomeActivity : MenuActivity() {
         if (this.authLevel == AuthLevels.VOLUNTEER || this.authLevel == AuthLevels.ADMIN) {
             scanQrBtn.visibility = View.VISIBLE
             scanQrBtn.setOnClickListener {
-                val i = Intent(this, QRScanActivity::class.java)
+                val i = Intent(this, QrMenuActivity::class.java)
                 startActivity(i)
             }
         }

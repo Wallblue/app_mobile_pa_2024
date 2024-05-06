@@ -66,4 +66,6 @@
     <string name="ScanQR">Scanner un QR Code</string>
     <string name="InvalidQrErr">QR code invalide</string>
     <string name="FailedReqErr">Requête échouée</string>
+    <string name="EditProductQuantity">Changer la quantité d\'un produit</string>
+    <string name="ShowProduct">Afficher les informations du produit</string>
 </resources>

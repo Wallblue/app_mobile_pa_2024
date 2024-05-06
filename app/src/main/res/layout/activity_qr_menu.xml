@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity"
+    android:orientation="vertical"
+    android:layout_marginLeft="20sp"
+    android:layout_marginRight="20sp"
+    android:gravity="center"
+    >
+    <ImageView
+        android:id="@+id/home_logo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:contentDescription="@string/ProductImg"
+        android:src="@drawable/logo_unlogged"
+        android:layout_marginBottom="50dp"
+        android:paddingTop="50dp"
+        />
+
+    <LinearLayout
+        android:paddingTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <Button
+            android:id="@+id/qr_show_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ShowProduct"
+            android:layout_marginBottom="15sp"
+            android:height="65sp"
+            android:width="500dp"
+            />
+
+        <Button
+            android:id="@+id/qr_edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/EditProductQuantity"
+            android:layout_marginBottom="15sp"
+            android:height="65sp"
+            android:width="500dp"
+            />
+    </LinearLayout>
+</FrameLayout>
