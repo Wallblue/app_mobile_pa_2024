@@ -7,13 +7,13 @@ import android.widget.Toast
 class QrMenuActivity() : MenuActivity() {
 
     private lateinit var showBtn : Button
-    private lateinit var editBtn : Button
+    private lateinit var editQuantityBtn : Button
 
     override val layoutRes: Int = R.layout.activity_qr_menu
 
     override fun getButtons() {
         this.showBtn = findViewById(R.id.qr_show_btn)
-        this.editBtn = findViewById(R.id.qr_edit_btn)
+        this.editQuantityBtn = findViewById(R.id.qr_editQuantity_btn)
     }
 
     override fun setButtonsListeners() {
@@ -22,17 +22,17 @@ class QrMenuActivity() : MenuActivity() {
     }
 
     private fun setShowListener(){
-        // TODO Change mode
         showBtn.setOnClickListener {
             val i = Intent(this, QRScanActivity::class.java)
+            i.putExtra(QRScanActivity.EXTRA_MODE, QrScanModes.SHOW_MODE)
             startActivity(i)
         }
     }
 
     private fun setEditListener(){
-        // TODO change mode
-        editBtn.setOnClickListener {
+        editQuantityBtn.setOnClickListener {
             Toast.makeText(applicationContext, "edit", Toast.LENGTH_SHORT).show()
+            // TODO i.putExtra(QRScanActivity.EXTRA_MODE, QrScanModes.EDIT_MODE)
             // TODO
         }
     }

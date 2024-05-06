@@ -3,11 +3,13 @@ package com.example.autempsdonne
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.webkit.URLUtil
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.util.isNotEmpty
@@ -20,6 +22,8 @@ class QRScanActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_QR = "productLink"
+        const val EXTRA_MODE = "scanMode"
+
         private const val CAMERA_REQUEST_CODE = 1
     }
 
@@ -99,12 +103,21 @@ class QRScanActivity : AppCompatActivity() {
 
     private fun onQrScan(displayValue: String) {
         if (isProductLink(displayValue)) {
-            val i = Intent(this, ProductActivity::class.java)
+            val i = Intent(this, getNextActivityClass())
             i.putExtra(EXTRA_QR, displayValue)
             startActivity(i)
         } else {
             this.badQrCode = true
             finish()
+        }
+    }
+
+    private fun getNextActivityClass(): Class<*>? {
+        val mode = intent.getSerializableExtra(EXTRA_MODE, QrScanModes::class.java)
+        return when (mode) {
+            QrScanModes.SHOW_MODE -> ProductActivity::class.java
+            QrScanModes.EDIT_MODE -> null // TODO
+            else -> null
         }
     }
 
