@@ -52,10 +52,8 @@ class ReadNfcActivity : AppCompatActivity() {
         super.onNewIntent(intent)
 
         if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
-            // We get the scanned tag
-            val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
 
-            val res = NfcManagement.readTag(intent, tagFromIntent).replace("\u0004", "https://")
+            val res = NfcManagement.readTag(intent).replace("\u0004", "https://")
             val regex = Regex(API_URL_ROOT + "volunteer/\\d+/slim ")
 
             if(URLUtil.isValidUrl(res) && res.matches(regex)){

@@ -37,7 +37,7 @@ class NfcManagement {
             Toast.makeText(context, R.string.Written, Toast.LENGTH_LONG).show()
         }
 
-        fun readTag(intent: Intent, tag: Tag?) : String {
+        fun readTag(intent: Intent) : String {
             val ndefMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
             val messages: List<NdefMessage>? = ndefMessages?.map { it as NdefMessage }
             var res = ""
