@@ -45,9 +45,6 @@ class ProductActivity : AppCompatActivity() {
             finish()
         }
 
-        // val tv = findViewById<TextView>(R.id.product_id_tv)
-        // tv.text =
-
         this.queue = Volley.newRequestQueue(this)
         val req = AuthStringRequest(
             Method.GET,

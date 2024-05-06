@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,66 +7,67 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity"
     android:orientation="vertical"
+    android:layout_marginLeft="20sp"
+    android:layout_marginRight="20sp"
+    android:gravity="center"
 >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/menu"
-        android:gravity="center"
-        android:textSize="50sp"
-    />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="20sp"
-        android:layout_marginRight="20sp"
-        android:gravity="center"
-    >
-
-        <Button
-            android:id="@+id/home_profile_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Profile"
-            android:layout_marginBottom="15sp"
-            android:height="65sp"
-            android:width="500dp"
+        <ImageView
+            android:id="@+id/home_logo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="@string/ProductImg"
+            android:src="@drawable/logo_unlogged"
+            android:layout_marginBottom="50dp"
+            android:paddingTop="50dp"
         />
 
-        <Button
-            android:id="@+id/home_read_nfc_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ReadNFC"
-            android:layout_marginBottom="15sp"
-            android:height="65sp"
-            android:width="500dp"
-        />
+        <LinearLayout
+            android:paddingTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+        >
+                <Button
+                    android:id="@+id/home_profile_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Profile"
+                    android:layout_marginBottom="15sp"
+                    android:height="65sp"
+                    android:width="500dp"
+                />
 
-        <Button
-            android:id="@+id/home_scanQR_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ScanQR"
-            android:layout_marginBottom="15sp"
-            android:height="65sp"
-            android:width="500dp"
-            android:visibility="gone"
-        />
+                <Button
+                    android:id="@+id/home_read_nfc_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ReadNFC"
+                    android:layout_marginBottom="15sp"
+                    android:height="65sp"
+                    android:width="500dp"
+                />
 
-        <Button
-            android:id="@+id/home_assignNFC_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/AssignNFC"
-            android:layout_marginBottom="15sp"
-            android:height="65sp"
-            android:width="500dp"
-            android:visibility="gone"
-        />
-    </LinearLayout>
+                <Button
+                    android:id="@+id/home_scanQR_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ScanQR"
+                    android:layout_marginBottom="15sp"
+                    android:height="65sp"
+                    android:width="500dp"
+                    android:visibility="gone"
+                />
 
-</LinearLayout>
+                <Button
+                    android:id="@+id/home_assignNFC_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/AssignNFC"
+                    android:layout_marginBottom="15sp"
+                    android:height="65sp"
+                    android:width="500dp"
+                    android:visibility="gone"
+                />
+        </LinearLayout>
+</FrameLayout>
