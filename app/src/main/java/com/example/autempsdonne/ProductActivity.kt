@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +16,7 @@ import com.android.volley.Request.Method
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.google.android.gms.vision.text.Line
 import org.json.JSONObject
 
 class ProductActivity : AppCompatActivity() {
@@ -66,7 +69,24 @@ class ProductActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.product_gathering_tv).text = response.getLong("gatheringId").toString()
                 findViewById<TextView>(R.id.product_size_tv).text = response.getInt("unitSize").toString()
 
-                findViewById<FrameLayout>(R.id.main).visibility = View.VISIBLE
+                val gotStorages = response.getJSONArray("storages")
+                val storages = mutableListOf<ProductStorage>()
+
+                for(index in 0 until gotStorages.length()){
+                    val current = gotStorages.getJSONObject(index)
+                    storages.add(
+                        ProductStorage(
+                            current.getString("reference"),
+                            current.getInt("quantity")
+                        )
+                    )
+                }
+
+                val storagesLv = findViewById<ListView>(R.id.product_storages_lv)
+                val storageAdapter = ProductStorageAdapter(this, storages)
+                storagesLv.adapter = storageAdapter
+
+                findViewById<LinearLayout>(R.id.main).visibility = View.VISIBLE
             },
             {
                 if(it.message != null)
