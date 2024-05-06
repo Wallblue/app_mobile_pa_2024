@@ -116,7 +116,7 @@ class QRScanActivity : AppCompatActivity() {
         val mode = intent.getSerializableExtra(EXTRA_MODE, QrScanModes::class.java)
         return when (mode) {
             QrScanModes.SHOW_MODE -> ProductActivity::class.java
-            QrScanModes.EDIT_MODE -> null // TODO
+            QrScanModes.EDIT_MODE -> EditProductQuantityActivity::class.java
             else -> null
         }
     }

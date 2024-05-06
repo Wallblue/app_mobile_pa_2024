@@ -31,9 +31,9 @@ class QrMenuActivity() : MenuActivity() {
 
     private fun setEditListener(){
         editQuantityBtn.setOnClickListener {
-            Toast.makeText(applicationContext, "edit", Toast.LENGTH_SHORT).show()
-            // TODO i.putExtra(QRScanActivity.EXTRA_MODE, QrScanModes.EDIT_MODE)
-            // TODO
+            val i = Intent(this, QRScanActivity::class.java)
+            i.putExtra(QRScanActivity.EXTRA_MODE, QrScanModes.EDIT_MODE)
+            startActivity(i)
         }
     }
 }

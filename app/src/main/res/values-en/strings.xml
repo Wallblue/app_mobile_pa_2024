@@ -62,4 +62,7 @@
     <string name="FailedReqErr">Failed Request</string>
     <string name="EditProductQuantity">Edit product quantity</string>
     <string name="ShowProduct">Show product information</string>
+    <string name="ImpactedQuantityDots">"Impacted quantity : "</string>
+    <string name="Remove">Remove</string>
+    <string name="Add">Add</string>
 </resources>

@@ -68,4 +68,7 @@
     <string name="FailedReqErr">Requête échouée</string>
     <string name="EditProductQuantity">Changer la quantité d\'un produit</string>
     <string name="ShowProduct">Afficher les informations du produit</string>
+    <string name="ImpactedQuantityDots">"Quantité concernée : "</string>
+    <string name="Remove">Retirer</string>
+    <string name="Add">Ajouter</string>
 </resources>
