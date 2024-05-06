@@ -65,4 +65,5 @@
     <string name="ImpactedQuantityDots">"Impacted quantity : "</string>
     <string name="Remove">Remove</string>
     <string name="Add">Add</string>
+    <string name="NegQuantityErr">Impossible negative quantity</string>
 </resources>

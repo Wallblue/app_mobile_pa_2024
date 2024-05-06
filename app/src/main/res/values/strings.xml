@@ -71,4 +71,5 @@
     <string name="ImpactedQuantityDots">"Quantité concernée : "</string>
     <string name="Remove">Retirer</string>
     <string name="Add">Ajouter</string>
+    <string name="NegQuantityErr">Quantité négative impossible</string>
 </resources>

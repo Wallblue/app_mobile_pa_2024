@@ -8,7 +8,7 @@
     tools:context=".EditProductQuantityActivity"
     android:orientation="vertical"
     android:gravity="top"
-    android:visibility="visible"
+    android:visibility="gone"
     >
 
     <ImageView
