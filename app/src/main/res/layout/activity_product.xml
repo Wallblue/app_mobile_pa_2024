@@ -14,11 +14,10 @@
     <ImageView
         android:id="@+id/product_img"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:contentDescription="@string/ProductImg"
-        android:src="@drawable/nfc"
+        android:src="@drawable/food_icon"
         android:layout_marginBottom="50dp"
-        android:minHeight="250dp"
         android:paddingTop="50dp"
     />
 
