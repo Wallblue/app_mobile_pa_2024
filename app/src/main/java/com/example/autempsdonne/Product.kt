@@ -1,9 +1,10 @@
 package com.example.autempsdonne
 
 import org.json.JSONArray
+import org.json.JSONObject
 import java.io.Serializable
 
-data class Product (
+class Product (
     var id : Long,
     var name : String,
     var expiry : String,
@@ -15,4 +16,17 @@ data class Product (
     var qrCodePath : String,
     var storages : JSONArray?,
     val url : String
-) : Serializable
+) : Serializable {
+    fun parseJson() : JSONObject {
+        return JSONObject().apply {
+            put("id", id)
+            put("name", name)
+            put("expiry", expiry)
+            put("quantity", quantity)
+            put("gatheringId", gatheringId)
+            put("type", type)
+            put("unitSize", unitSize)
+            put("storages", storages)
+        }
+    }
+}
