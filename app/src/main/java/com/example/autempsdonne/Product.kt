@@ -15,6 +15,8 @@ class Product (
     var image : String,
     var qrCodePath : String,
     var storages : JSONArray?,
+    var storedQuantity : Int,
+    var notStoredQuantity : Int,
     val url : String
 ) : Serializable {
     fun parseJson() : JSONObject {
