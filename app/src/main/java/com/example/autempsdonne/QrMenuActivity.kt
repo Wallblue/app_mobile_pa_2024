@@ -14,7 +14,6 @@ class QrMenuActivity() : MenuActivity() {
 
     override fun getButtons() {
         this.showBtn = findViewById(R.id.qr_show_btn)
-        this.editQuantityBtn = findViewById(R.id.qr_editQuantity_btn)
         this.stockBtn = findViewById(R.id.qr_stock_btn)
     }
 
