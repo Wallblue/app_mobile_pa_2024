@@ -26,8 +26,8 @@
     <string name="Volunteer">Volontaire</string>
     <string name="VolunteerLoadingErr">Chargement du volontaire impossible</string>
     <string name="Profile">Profil</string>
-    <string name="EmailAddress">Addresse Email</string>
-    <string name="PhoneNb">Numéro de téléphone</string>
+    <string name="EmailAddressDots">Addresse Email : </string>
+    <string name="PhoneNbDots">N° de téléphone : </string>
     <string name="Address">Adresse</string>
     <string name="Street">Rue</string>
     <string name="HouseNb">Numéro d\'adresse</string>

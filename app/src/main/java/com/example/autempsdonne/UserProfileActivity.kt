@@ -26,8 +26,8 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
     private var usernameTv : TextView? = null
     private var firstnameEd : EditText? = null
     private var nameEd : EditText? = null
-    private var emailEd : EditText? = null
-    private var phoneEd : EditText? = null
+    private var emailTv : TextView? = null
+    private var phoneTv : TextView? = null
     private var birthdateTv: TextView? = null
     private var addressLl : LinearLayout? = null
     private var houseNumberTv : TextView? = null
@@ -35,7 +35,7 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
     private var buildingNumberTv : TextView? = null
     private var zipcodeTv : TextView? = null
     private var cityTv : TextView? = null
-    private var siteEd : EditText? = null
+    private var siteTv : TextView? = null
     private var editBtn : Button? = null
     private var buttonsV : View? = null
     private var cancelBtn : Button? = null
@@ -137,8 +137,8 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
         usernameTv = findViewById(R.id.profile_username_tv)
         firstnameEd = findViewById(R.id.profile_firstname_ed)
         nameEd = findViewById(R.id.profile_name_ed)
-        emailEd = findViewById(R.id.profile_email_ed)
-        phoneEd = findViewById(R.id.profile_phone_ed)
+        emailTv = findViewById(R.id.profile_email_tv)
+        phoneTv = findViewById(R.id.profile_phone_tv)
         birthdateTv = findViewById(R.id.profile_birthdate_tv)
         addressLl = findViewById(R.id.profile_address_ll)
         houseNumberTv = findViewById(R.id.profile_houseNb_tv)
@@ -146,7 +146,7 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
         buildingNumberTv = findViewById(R.id.profile_buildingNb_tv)
         zipcodeTv = findViewById(R.id.profile_zipcode_tv)
         cityTv = findViewById(R.id.profile_city_tv)
-        siteEd = findViewById(R.id.profile_site_ed)
+        siteTv = findViewById(R.id.profile_site_tv)
         editBtn = findViewById(R.id.profile_edit_btn)
         buttonsV = findViewById(R.id.profile_buttons_v)
         cancelBtn = findViewById(R.id.profile_cancel_btn)
@@ -156,24 +156,25 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
         usernameTv?.text = userInfo.getString("username")
         firstnameEd?.setText(userInfo.getString("firstName"))
         nameEd?.setText(userInfo.getString("name"))
-        emailEd?.setText(userInfo.getString("email"))
-        phoneEd?.setText(userInfo.getString("phone"))
+        emailTv?.text = userInfo.getString("email")
+        phoneTv?.text = userInfo.getString("phone")
         birthdateTv?.text = userInfo.getString("birthdate")
         houseNumberTv?.text = userInfo.getString("houseNumber")
         streetTv?.text = userInfo.getString("street")
         buildingNumberTv?.text = userInfo.getString("buildingNumber")
         zipcodeTv?.text = userInfo.getInt("zipcode").toString()
         cityTv?.text = userInfo.getString("city")
-        siteEd?.setText(userInfo.getJSONObject("site").getString("name"))
+        siteTv?.text = userInfo.getJSONObject("site").getString("name")
     }
 
     private fun changeEditTextsStatus(status: Boolean){
         firstnameEd?.isEnabled = status
         nameEd?.isEnabled = status
-        birthdateTv?.isEnabled = status
-        //emailEd?.isEnabled = status
-        //phoneEd?.isEnabled = status
-        //siteEd?.isEnabled = status
+
+        val color = if(status) R.color.gray else android.R.color.transparent
+
+        addressLl?.setBackgroundResource(color)
+        birthdateTv?.setBackgroundResource(color)
     }
 
     private fun switchEditMode(isCancellation : Boolean = false){
@@ -233,8 +234,8 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
             put("name", nameEd?.text.toString())
             put("firstName", firstnameEd?.text.toString())
             put("birthdate", birthdateTv?.text.toString())
-            put("email", emailEd?.text.toString())
-            put("phone", phoneEd?.text.toString())
+            put("email", emailTv?.text.toString())
+            put("phone", phoneTv?.text.toString())
             put("street", streetTv?.text.toString())
             put("houseNumber", houseNumberTv?.text.toString())
             put("city", cityTv?.text.toString())
@@ -270,8 +271,8 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
             put("name", nameEd?.text.toString())
             put("firstName", firstnameEd?.text.toString())
             put("birthdate", birthdateTv?.text.toString())
-            put("email", emailEd?.text.toString())
-            put("phone", phoneEd?.text.toString())
+            put("email", emailTv?.text.toString())
+            put("phone", phoneTv?.text.toString())
             put("street", streetTv?.text.toString())
             put("houseNumber", houseNumberTv?.text.toString())
             put("city", cityTv?.text.toString())

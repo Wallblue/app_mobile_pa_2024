@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:visibility="gone"
+    android:visibility="visible"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserProfileActivity"
@@ -63,35 +63,8 @@
         />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/profile_email_ed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/EmailAddress"
-        android:autofillHints="emailAddress"
-        android:inputType="textEmailAddress"
-        android:enabled="false"
-        android:textSize="20sp"
-        android:minWidth="210dp"
-        android:minHeight="48dp"
-    />
-
-    <EditText
-        android:id="@+id/profile_phone_ed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/PhoneNb"
-        android:autofillHints="phone"
-        android:inputType="phone"
-        android:enabled="false"
-        android:textSize="20sp"
-        android:minWidth="210dp"
-        android:minHeight="48dp"
-        android:layout_marginBottom="10dp"
-    />
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
@@ -193,13 +166,61 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/EmailAddressDots"
+            android:textSize="20sp"
+            android:minWidth="150dp"
+            android:minHeight="48dp"
+            android:layout_marginEnd="15dp"
+            />
+
+        <TextView
+            android:id="@+id/profile_email_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
         >
         <TextView
-            android:id="@+id/profile_site_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/PhoneNbDots"
+            android:textSize="20sp"
+            android:minWidth="150dp"
+            android:minHeight="48dp"
+            android:layout_marginEnd="15dp"
+            />
+
+        <TextView
+            android:id="@+id/profile_phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        >
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Site_dots"
@@ -208,18 +229,13 @@
             android:layout_marginEnd="15dp"
             />
 
-        <EditText
-            android:id="@+id/profile_site_ed"
+        <TextView
+            android:id="@+id/profile_site_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/Site"
-            android:autofillHints="name"
-            android:inputType="textPersonName"
-            android:enabled="false"
-            android:minWidth="150dp"
             android:minHeight="48dp"
             android:textSize="20sp"
-            />
+        />
     </LinearLayout>
 
     <LinearLayout

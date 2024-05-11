@@ -26,8 +26,8 @@
     <string name="Volunteer">Volunteer</string>
     <string name="VolunteerLoadingErr">Failed to load volunteer</string>
     <string name="Profile">Profile</string>
-    <string name="EmailAddress">Email Address</string>
-    <string name="PhoneNb">Phone Number</string>
+    <string name="EmailAddressDots">Email Address : </string>
+    <string name="PhoneNbDots">Phone Number : </string>
     <string name="Address">Address</string>
     <string name="Street">Street</string>
     <string name="HouseNb">House Number</string>
