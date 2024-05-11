@@ -2,12 +2,10 @@ package com.example.autempsdonne
 
 import android.content.Intent
 import android.widget.Button
-import android.widget.Toast
 
-class QrMenuActivity() : MenuActivity() {
+class QrMenuActivity : MenuActivity() {
 
     private lateinit var showBtn : Button
-    private lateinit var editQuantityBtn : Button
     private lateinit var stockBtn : Button
 
     override val layoutRes: Int = R.layout.activity_qr_menu
@@ -19,7 +17,6 @@ class QrMenuActivity() : MenuActivity() {
 
     override fun setButtonsListeners() {
         setShowListener()
-        setEditListener()
         setStockListener()
     }
 
@@ -35,14 +32,6 @@ class QrMenuActivity() : MenuActivity() {
         stockBtn.setOnClickListener {
             val i = Intent(this, QRScanActivity::class.java)
             i.putExtra(QRScanActivity.EXTRA_MODE, QrScanModes.STOCK_MODE)
-            startActivity(i)
-        }
-    }
-
-    private fun setEditListener(){
-        editQuantityBtn.setOnClickListener {
-            val i = Intent(this, QRScanActivity::class.java)
-            i.putExtra(QRScanActivity.EXTRA_MODE, QrScanModes.EDIT_MODE)
             startActivity(i)
         }
     }
