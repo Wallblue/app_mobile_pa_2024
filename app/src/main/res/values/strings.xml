@@ -77,7 +77,10 @@
     <string name="ManageStorages">Gérer le stockage d\'un produit</string>
     <string name="DestockSuccess">Déstockage effectué</string>
     <string name="ProductNoMoreStored">Le produit n\'est plus stocké nulle part</string>
-    <string name="DestockProduct">Déstocker un produit</string>
+    <string name="ManageStock">Gérer le stock d\'un produit</string>
     <string name="ProductNotStored">Le produit scanné n\'est stocké nulle part</string>
     <string name="ThrowOut">Jeter les produits déstockés</string>
+    <string name="NotStoredItems">Produits non stockés</string>
+    <string name="RemoveQuantity">Supprimer la quantité</string>
+    <string name="RemoveQuantitySuccess">Suppression effectuée</string>
 </resources>

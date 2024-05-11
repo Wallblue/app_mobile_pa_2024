@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.NumberPicker
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -28,6 +27,7 @@ class ProductStorageManagementActivity : AppCompatActivity() {
     private lateinit var storageNp : NumberPicker
     private lateinit var quantityNp : NumberPicker
     private lateinit var throwOutStc : SwitchCompat
+    private lateinit var mainBtn : Button
 
     private lateinit var queue : RequestQueue
     private var token : String? = null
@@ -78,10 +78,12 @@ class ProductStorageManagementActivity : AppCompatActivity() {
                     response.getString("image"),
                     response.getString("qrCodePath"),
                     response.getJSONArray("storages"),
+                    response.getInt("storedQuantity"),
+                    response.getInt("notStoredQuantity"),
                     url
                 )
 
-                if(gotProduct.storages?.length() == 0){
+                if(gotProduct.quantity == 0){
                     Toast.makeText(applicationContext, R.string.ProductNotStored, Toast.LENGTH_LONG).show()
                     finish()
                     return@AuthStringRequest
@@ -97,6 +99,7 @@ class ProductStorageManagementActivity : AppCompatActivity() {
                 this.typeTv = findViewById(R.id.product_type_tv)
                 this.quantityTv = findViewById(R.id.product_quantity_tv)
                 this.throwOutStc = findViewById(R.id.throwOutStc)
+                this.mainBtn = findViewById(R.id.storage_main_btn)
 
                 this.idTv.text = gotProduct.id.toString()
                 this.nameTv.text = gotProduct.name
@@ -111,10 +114,17 @@ class ProductStorageManagementActivity : AppCompatActivity() {
                     this.storagesHm[current!!.getString("reference")] = current.getInt("quantity")
                 }
 
-                val refList = this.storagesHm.keys.toTypedArray()
+                val refList = this.storagesHm.keys.toMutableList()
+                if(gotProduct.notStoredQuantity > 0){
+                    refList.add(0, getString(R.string.NotStoredItems))
+                    storagesHm[getString(R.string.NotStoredItems)] = gotProduct.notStoredQuantity
+                    mainBtn.text = getString(R.string.RemoveQuantity)
+                    throwOutStc.visibility = View.GONE
+                }
+
                 this.storageNp.minValue = 0
                 this.storageNp.maxValue = refList.size - 1
-                this.storageNp.displayedValues = refList
+                this.storageNp.displayedValues = refList.toTypedArray()
                 this.storageNp.wrapSelectorWheel = false
 
                 this.quantityNp = findViewById(R.id.product_quantity_np)
@@ -123,14 +133,26 @@ class ProductStorageManagementActivity : AppCompatActivity() {
                 this.quantityNp.wrapSelectorWheel = false
 
                 this.storageNp.setOnValueChangedListener { _, _, newVal ->
-                    this.quantityNp.maxValue = this.storagesHm[refList[newVal]]!!
+                    updateQuantityPicker()
+
+                    if(this.storageNp.displayedValues[newVal] == getString(R.string.NotStoredItems)){
+                        throwOutStc.visibility = View.GONE
+                        mainBtn.text = getString(R.string.RemoveQuantity)
+                    }
+                    else{
+                        throwOutStc.visibility = View.VISIBLE
+                        mainBtn.text = getString(R.string.Destock)
+                    }
                 }
 
 
                 // Setting the buttons
 
-                findViewById<Button>(R.id.product_destock_btn).setOnClickListener {
-                    onDestock()
+                mainBtn.setOnClickListener {
+                    if(this.storageNp.displayedValues[storageNp.value] == getString(R.string.NotStoredItems))
+                        onRemove()
+                    else
+                        onDestock()
                 }
 
                 findViewById<LinearLayout>(R.id.main).visibility = View.VISIBLE
@@ -155,9 +177,10 @@ class ProductStorageManagementActivity : AppCompatActivity() {
             put("throwOut", throwOutStc.isChecked)
         }
 
-        val refList = this.storagesHm.keys.toTypedArray()
+        val refList = storageNp.displayedValues
         val ref = Utils.parseStorageReference(refList[storageNp.value])
         val url = API_URL_ROOT + "addresses/warehouses/" + ref[0] + "/sections/" + ref[1] + "/shelves/" + ref[2] + "/storages/" + ref[3] + "/destock"
+
         val req = AuthJsonObjectRequest(
             Request.Method.PATCH,
             url,
@@ -165,18 +188,14 @@ class ProductStorageManagementActivity : AppCompatActivity() {
             this.token!!,
             {
                 Toast.makeText(applicationContext, R.string.DestockSuccess, Toast.LENGTH_SHORT).show()
-                val newQuantity = this.quantityNp.maxValue - this.quantityNp.value
 
-                if(newQuantity == 0){
-                    if(storageNp.maxValue == 0){
-                        Toast.makeText(applicationContext, R.string.ProductNoMoreStored, Toast.LENGTH_LONG).show()
-                        finish()
-                        return@AuthJsonObjectRequest
-                    }
-                    storageNp.maxValue--
-                    storageNp.displayedValues = refList.drop(storageNp.value).toTypedArray()
-                } else
-                    quantityNp.maxValue = newQuantity
+                if(throwOutStc.isChecked){
+                    this.gotProduct.quantity -= quantityNp.value
+                    this.quantityTv.text = this.gotProduct.quantity.toString()
+                }
+                else updateNotStoredProducts(this.quantityNp.value)
+
+                updateNumberPickers()
             },
             {
                 val res = JSONObject(String(it.networkResponse.data, Charsets.UTF_8))
@@ -184,5 +203,83 @@ class ProductStorageManagementActivity : AppCompatActivity() {
             }
         )
         this.queue.add(req)
+    }
+
+    private fun onRemove(){
+        if(this.gotProduct.quantity - quantityNp.value < 0){
+            Toast.makeText(applicationContext, R.string.NegQuantityErr, Toast.LENGTH_LONG).show()
+            return
+        }
+        gotProduct.quantity -= quantityNp.value
+
+        val body = gotProduct.parseJson()
+        body.remove("storages")
+
+        val req = AuthJsonObjectRequest(
+            Request.Method.PATCH,
+            this.gotProduct.url,
+            body,
+            this.token!!,
+            {
+                Toast.makeText(applicationContext, R.string.RemoveQuantitySuccess, Toast.LENGTH_SHORT).show()
+
+                this.quantityTv.text = this.gotProduct.quantity.toString()
+
+                updateNumberPickers()
+            },
+            {
+                val res = JSONObject(String(it.networkResponse.data, Charsets.UTF_8))
+                Toast.makeText(applicationContext, res.getString("message"), Toast.LENGTH_SHORT).show()
+                gotProduct.quantity += quantityNp.value
+                println(it)
+            }
+        )
+        this.queue.add(req)
+    }
+
+    private fun updateNumberPickers(){
+        val newQuantity = this.quantityNp.maxValue - this.quantityNp.value
+
+        val key = storageNp.displayedValues[storageNp.value]
+        this.storagesHm[key] = newQuantity
+
+        if(newQuantity == 0){
+            if(storageNp.maxValue == 0){
+                Toast.makeText(applicationContext, R.string.ProductNoMoreStored, Toast.LENGTH_LONG).show()
+                finish()
+                return
+            }
+            removeCurrentStorageRef()
+            updateQuantityPicker()
+        } else
+            quantityNp.maxValue = newQuantity
+    }
+
+    private fun removeCurrentStorageRef(){
+        val refList = storageNp.displayedValues.toMutableList()
+        val i = storageNp.value
+        refList.removeAt(i)
+        storageNp.maxValue--
+        storageNp.displayedValues = refList.toTypedArray()
+    }
+    private fun updateQuantityPicker(){
+        this.quantityNp.maxValue = storagesHm[this.storageNp.displayedValues[storageNp.value]]!!
+    }
+
+    private fun updateNotStoredProducts(destockQuantity : Int = 0){
+        if(this.storageNp.displayedValues.contains(getString(R.string.NotStoredItems))){
+            storagesHm[getString(R.string.NotStoredItems)] = storagesHm[getString(R.string.NotStoredItems)]!! + destockQuantity
+        }
+        else{
+            val refList = this.storagesHm.keys.toMutableList()
+            if(destockQuantity > 0){
+                refList.add(0, getString(R.string.NotStoredItems))
+                this.storagesHm[getString(R.string.NotStoredItems)] = destockQuantity
+                this.storageNp.displayedValues = refList.toTypedArray()
+                this.storageNp.maxValue++
+                this.storageNp.value++ // We adapt the current value bc we've inserted a new line in the picker
+            }
+        }
+
     }
 }

@@ -19,6 +19,7 @@
     <string name="Err">Something went wrong</string>
     <string name="NoWritingErr">Writing is impossible</string>
     <string name="NoSpaceTagErr">No more space in tag</string>
+
     <string name="Written">Written</string>
     <string name="ReadNFC">Read a tag</string>
     <string name="DataErr">Invalid Data</string>
@@ -71,7 +72,10 @@
     <string name="ManageStorages">Manage a product stock</string>
     <string name="DestockSuccess">Destock succeed</string>
     <string name="ProductNoMoreStored">Product is not stored anywhere anymore</string>
-    <string name="DestockProduct">Destock a product</string>
+    <string name="ManageStock">Manage one product stock</string>
     <string name="ProductNotStored">Scanned product is not stored anywhere</string>
     <string name="ThrowOut">Throw out products on destock</string>
+    <string name="NotStoredItems">Not Stored items</string>
+    <string name="RemoveQuantity">Remove quantity</string>
+    <string name="RemoveQuantitySuccess">Removal succeed</string>
 </resources>
