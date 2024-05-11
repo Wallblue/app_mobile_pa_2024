@@ -73,4 +73,5 @@
     <string name="ProductNoMoreStored">Product is not stored anywhere anymore</string>
     <string name="DestockProduct">Destock a product</string>
     <string name="ProductNotStored">Scanned product is not stored anywhere</string>
+    <string name="ThrowOut">Throw out products on destock</string>
 </resources>

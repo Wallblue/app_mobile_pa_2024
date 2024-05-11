@@ -6,10 +6,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.NumberPicker
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.android.volley.Request
@@ -25,6 +27,7 @@ class ProductStorageManagementActivity : AppCompatActivity() {
     private lateinit var quantityTv : TextView
     private lateinit var storageNp : NumberPicker
     private lateinit var quantityNp : NumberPicker
+    private lateinit var throwOutStc : SwitchCompat
 
     private lateinit var queue : RequestQueue
     private var token : String? = null
@@ -93,6 +96,7 @@ class ProductStorageManagementActivity : AppCompatActivity() {
                 this.nameTv = findViewById(R.id.product_name_tv)
                 this.typeTv = findViewById(R.id.product_type_tv)
                 this.quantityTv = findViewById(R.id.product_quantity_tv)
+                this.throwOutStc = findViewById(R.id.throwOutStc)
 
                 this.idTv.text = gotProduct.id.toString()
                 this.nameTv.text = gotProduct.name
@@ -148,6 +152,7 @@ class ProductStorageManagementActivity : AppCompatActivity() {
         val body = JSONObject().apply {
             put("productId", gotProduct.id)
             put("quantity", quantityNp.value)
+            put("throwOut", throwOutStc.isChecked)
         }
 
         val refList = this.storagesHm.keys.toTypedArray()

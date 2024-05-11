@@ -79,4 +79,5 @@
     <string name="ProductNoMoreStored">Le produit n\'est plus stocké nulle part</string>
     <string name="DestockProduct">Déstocker un produit</string>
     <string name="ProductNotStored">Le produit scanné n\'est stocké nulle part</string>
+    <string name="ThrowOut">Jeter les produits déstockés</string>
 </resources>
