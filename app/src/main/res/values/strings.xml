@@ -72,4 +72,11 @@
     <string name="Remove">Retirer</string>
     <string name="Add">Ajouter</string>
     <string name="NegQuantityErr">Quantité négative impossible</string>
+    <string name="Destock">Déstocker</string>
+    <string name="ImpactedStorageDots">"Stockage concerné : "</string>
+    <string name="ManageStorages">Gérer le stockage d\'un produit</string>
+    <string name="DestockSuccess">Déstockage effectué</string>
+    <string name="ProductNoMoreStored">Le produit n\'est plus stocké nulle part</string>
+    <string name="DestockProduct">Déstocker un produit</string>
+    <string name="ProductNotStored">Le produit scanné n\'est stocké nulle part</string>
 </resources>

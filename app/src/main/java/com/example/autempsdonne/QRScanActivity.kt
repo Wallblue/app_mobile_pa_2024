@@ -117,6 +117,7 @@ class QRScanActivity : AppCompatActivity() {
         return when (mode) {
             QrScanModes.SHOW_MODE -> ProductActivity::class.java
             QrScanModes.EDIT_MODE -> EditProductQuantityActivity::class.java
+            QrScanModes.STOCK_MODE -> ProductStorageManagementActivity::class.java
             else -> null
         }
     }

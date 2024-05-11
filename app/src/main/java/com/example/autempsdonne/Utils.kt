@@ -17,5 +17,9 @@ class Utils {
             val value = JSONObject(decodeTokenInfo(token)).getInt("authLevel")
             return AuthLevels.findFromValue(value)
         }
+
+        fun parseStorageReference(ref : String) : List<String> {
+            return ref.split('-')
+        }
     }
 }
