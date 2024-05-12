@@ -14,6 +14,8 @@ import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 
 class VolunteersListActivity : AppCompatActivity() {
+
+    private var token : String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,6 +25,13 @@ class VolunteersListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        this.token = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE).getString("token", "")
+
+        if(this.token == null){
+            Toast.makeText(applicationContext, R.string.NullTokenErr, Toast.LENGTH_LONG).show()
+            finish()
+        }
     }
 
     override fun onStart() {
@@ -31,8 +40,8 @@ class VolunteersListActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
         val url = API_URL_ROOT + "admin/volunteers"
 
-        val req = StringRequest(
-            Request.Method.GET, url,
+        val req = AuthStringRequest(
+            Request.Method.GET, url, this.token!!,
             {content ->
                 val gotVolunteers = JSONObject(content).getJSONArray("data")
                 val volunteers = mutableListOf<Volunteer>()

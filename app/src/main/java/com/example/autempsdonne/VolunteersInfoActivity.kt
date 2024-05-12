@@ -13,6 +13,8 @@ import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 
 class VolunteersInfoActivity : AppCompatActivity() {
+
+    private var token : String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,12 +24,17 @@ class VolunteersInfoActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        this.token = getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE).getString("token", "")
 
+        if(this.token == null){
+            Toast.makeText(applicationContext, R.string.NullTokenErr, Toast.LENGTH_LONG).show()
+            finish()
+        }
 
         val queue = Volley.newRequestQueue(this)
 
-        val req = StringRequest(
-            Request.Method.GET, intent.getStringExtra("uri"),
+        val req = AuthStringRequest(
+            Request.Method.GET, intent.getStringExtra("uri")!!, this.token!!,
             {content ->
                 val gotVolunteer = JSONObject(content)
                 val gotSite = gotVolunteer.getJSONObject("site")
