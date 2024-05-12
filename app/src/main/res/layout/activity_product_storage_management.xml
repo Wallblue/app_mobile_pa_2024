@@ -8,16 +8,16 @@
     tools:context=".EditProductQuantityActivity"
     android:orientation="vertical"
     android:gravity="top"
-    android:visibility="gone"
+    android:visibility="visible"
     >
 
     <ImageView
         android:id="@+id/product_img"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:contentDescription="@string/ProductImg"
         android:src="@drawable/food_icon"
-        android:paddingTop="50dp"
+        android:layout_marginTop="10dp"
         />
 
     <LinearLayout
