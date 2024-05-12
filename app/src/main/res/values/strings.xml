@@ -83,4 +83,6 @@
     <string name="NotStoredItems">Produits non stockés</string>
     <string name="RemoveQuantity">Supprimer la quantité</string>
     <string name="RemoveQuantitySuccess">Suppression effectuée</string>
+    <string name="MinorDateErr">Vous devez avoir 18 ans</string>
+    <string name="TooFarDateErr">La date indiquée a plus de 100 ans</string>
 </resources>

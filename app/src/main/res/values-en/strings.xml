@@ -78,4 +78,6 @@
     <string name="NotStoredItems">Not Stored items</string>
     <string name="RemoveQuantity">Remove quantity</string>
     <string name="RemoveQuantitySuccess">Removal succeed</string>
+    <string name="MinorDateErr">You must be 18</string>
+    <string name="TooFarDateErr">Given date is more than 100 years</string>
 </resources>

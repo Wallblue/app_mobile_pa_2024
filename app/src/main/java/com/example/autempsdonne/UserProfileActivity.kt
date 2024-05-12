@@ -21,6 +21,8 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Locale
+import kotlin.math.max
+import kotlin.math.min
 
 class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
     private var usernameTv : TextView? = null
@@ -289,12 +291,26 @@ class UserProfileActivity : AppCompatActivity() , AddressUpdateListener {
     }
 
     private fun openCalendarModal(){
+        val maxDate = Calendar.getInstance()
+        maxDate.add(Calendar.YEAR, -18)
+
+        val minDate = Calendar.getInstance()
+        minDate.add(Calendar.YEAR, -100)
+
         val datePicker = DatePickerDialog(
             this,
             { _, year, month, dayOfMonth ->
                 val calendar = Calendar.getInstance()
                 calendar.set(year, month, dayOfMonth)
-                birthdateTv?.text = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
+
+
+                if (calendar.timeInMillis > maxDate.timeInMillis)
+                    Toast.makeText(this, R.string.MinorDateErr, Toast.LENGTH_SHORT).show()
+                else
+                    if (calendar.timeInMillis < minDate.timeInMillis)
+                        Toast.makeText(this, R.string.TooFarDateErr, Toast.LENGTH_SHORT).show()
+                    else
+                        birthdateTv?.text = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
             },
             Calendar.getInstance().get(Calendar.YEAR),
             Calendar.getInstance().get(Calendar.MONTH),
